@@ -1,0 +1,47 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "HomePage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "RecentJobs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "other.job-card",
+      "max": 4,
+      "min": 4
+    },
+    "Header": {
+      "type": "component",
+      "repeatable": true,
+      "component": "other.header",
+      "required": true,
+      "max": 3,
+      "min": 3
+    },
+    "steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "other.steps",
+      "required": false,
+      "min": 3,
+      "max": 3
+    },
+    "jobSearchImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "real_estates",
+  "info": {
+    "singularName": "real-estate",
+    "pluralName": "real-estates",
+    "displayName": "Real Estates",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Квартира",
+        "Комната",
+        "Дом"
+      ],
+      "required": true
+    },
+    "size": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "rooms": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "price": {
+      "type": "integer",
+      "min": 0,
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

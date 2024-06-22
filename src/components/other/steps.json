@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_other_steps",
+  "info": {
+    "displayName": "steps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "step1": {
+      "type": "text",
+      "required": true
+    },
+    "step2": {
+      "type": "text",
+      "required": true
+    },
+    "step3": {
+      "type": "text",
+      "required": true
+    },
+    "step4": {
+      "type": "text"
+    }
+  }
+}

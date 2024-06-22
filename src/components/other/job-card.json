@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_other_job_cards",
+  "info": {
+    "displayName": "JobCard"
+  },
+  "options": {},
+  "attributes": {
+    "job": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job.job"
+    }
+  }
+}

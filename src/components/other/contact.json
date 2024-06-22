@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_other_contacts",
+  "info": {
+    "displayName": "contact",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "phone",
+        "telegram",
+        "whatsapp",
+        "mail"
+      ]
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

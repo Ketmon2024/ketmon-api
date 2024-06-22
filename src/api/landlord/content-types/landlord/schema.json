@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "landlords",
+  "info": {
+    "singularName": "landlord",
+    "pluralName": "landlords",
+    "displayName": "Landlords"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "locationName": {
+      "type": "string",
+      "required": true
+    },
+    "isScammer": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "rating": {
+      "type": "decimal",
+      "min": 0,
+      "max": 5
+    },
+    "isCompany": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}
