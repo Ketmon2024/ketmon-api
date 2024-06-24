@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_other_real_estate_cards",
+  "info": {
+    "displayName": "realEstateCard"
+  },
+  "options": {},
+  "attributes": {
+    "realEstate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::real-estate.real-estate"
+    }
+  }
+}

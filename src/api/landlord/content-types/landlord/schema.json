@@ -33,6 +33,12 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "real_estates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::real-estate.real-estate",
+      "mappedBy": "landlord"
     }
   }
 }

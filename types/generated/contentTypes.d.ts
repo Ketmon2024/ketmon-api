@@ -736,6 +736,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'api::job.job'
     >;
+    real_estates: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::real-estate.real-estate'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -915,50 +920,17 @@ export interface ApiCityCity extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     jobs: Attribute.Relation<'api::city.city', 'oneToMany', 'api::job.job'>;
+    real_estates: Attribute.Relation<
+      'api::city.city',
+      'oneToMany',
+      'api::real-estate.real-estate'
+    >;
+    items: Attribute.Relation<'api::city.city', 'oneToMany', 'api::item.item'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::city.city', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::city.city', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiDocumentDocument extends Schema.CollectionType {
-  collectionName: 'documents';
-  info: {
-    singularName: 'document';
-    pluralName: 'documents';
-    displayName: 'documents';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    finder: Attribute.String;
-    contact: Attribute.String & Attribute.Required;
-    type: Attribute.Enumeration<
-      [
-        '\u041F\u0430\u0441\u043F\u043E\u0440\u0442',
-        '\u0414\u0440\u0443\u0433\u043E\u0435'
-      ]
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::document.document',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::document.document',
-      'oneToOne',
-      'admin::user'
-    > &
       Attribute.Private;
   };
 }
@@ -1075,6 +1047,26 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
         number
       >;
     jobSearchImage: Attribute.Media<'images'> & Attribute.Required;
+    itemsSearch: Attribute.Media<'images'> & Attribute.Required;
+    realEstateSearch: Attribute.Media<'images'> & Attribute.Required;
+    RecetRealEstates: Attribute.Component<'other.real-estate-card', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 4;
+          max: 4;
+        },
+        number
+      >;
+    RecentItems: Attribute.Component<'other.item-card', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 4;
+          max: 4;
+        },
+        number
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1088,6 +1080,47 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiItemItem extends Schema.CollectionType {
+  collectionName: 'items';
+  info: {
+    singularName: 'item';
+    pluralName: 'items';
+    displayName: 'Items';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    type: Attribute.Enumeration<
+      [
+        '\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442',
+        '\u041B\u0438\u0447\u043D\u0430\u044F \u0432\u0435\u0449\u044C',
+        '\u0427\u0435\u043B\u043E\u0432\u0435\u043A'
+      ]
+    > &
+      Attribute.Required;
+    contacts: Attribute.Component<'other.contact', true> &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 2;
+        },
+        number
+      >;
+    city: Attribute.Relation<'api::item.item', 'manyToOne', 'api::city.city'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::item.item', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1197,6 +1230,11 @@ export interface ApiLandlordLandlord extends Schema.CollectionType {
     isCompany: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+    real_estates: Attribute.Relation<
+      'api::landlord.landlord',
+      'oneToMany',
+      'api::real-estate.real-estate'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1261,6 +1299,36 @@ export interface ApiRealEstateRealEstate extends Schema.CollectionType {
       >;
     description: Attribute.Text & Attribute.Required;
     images: Attribute.Media<'images', true>;
+    landlord: Attribute.Relation<
+      'api::real-estate.real-estate',
+      'manyToOne',
+      'api::landlord.landlord'
+    >;
+    city: Attribute.Relation<
+      'api::real-estate.real-estate',
+      'manyToOne',
+      'api::city.city'
+    >;
+    users: Attribute.Relation<
+      'api::real-estate.real-estate',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    slug: Attribute.UID &
+      Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
+    locationName: Attribute.String & Attribute.Required;
+    locationCoordinates: Attribute.JSON &
+      Attribute.Required &
+      Attribute.CustomField<'plugin::google-maps.location-picker'>;
+    contacts: Attribute.Component<'other.contact', true> &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 2;
+        },
+        number
+      >;
+    perMonth: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<1>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1301,10 +1369,10 @@ declare module '@strapi/types' {
       'api::bank.bank': ApiBankBank;
       'api::category.category': ApiCategoryCategory;
       'api::city.city': ApiCityCity;
-      'api::document.document': ApiDocumentDocument;
       'api::employer.employer': ApiEmployerEmployer;
       'api::faq.faq': ApiFaqFaq;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::item.item': ApiItemItem;
       'api::job.job': ApiJobJob;
       'api::landlord.landlord': ApiLandlordLandlord;
       'api::real-estate.real-estate': ApiRealEstateRealEstate;

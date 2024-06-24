@@ -25,6 +25,16 @@ export interface OtherHeader extends Schema.Component {
   };
 }
 
+export interface OtherItemCard extends Schema.Component {
+  collectionName: 'components_other_item_cards';
+  info: {
+    displayName: 'itemCard';
+  };
+  attributes: {
+    item: Attribute.Relation<'other.item-card', 'oneToOne', 'api::item.item'>;
+  };
+}
+
 export interface OtherJobCard extends Schema.Component {
   collectionName: 'components_other_job_cards';
   info: {
@@ -32,6 +42,20 @@ export interface OtherJobCard extends Schema.Component {
   };
   attributes: {
     job: Attribute.Relation<'other.job-card', 'oneToOne', 'api::job.job'>;
+  };
+}
+
+export interface OtherRealEstateCard extends Schema.Component {
+  collectionName: 'components_other_real_estate_cards';
+  info: {
+    displayName: 'realEstateCard';
+  };
+  attributes: {
+    realEstate: Attribute.Relation<
+      'other.real-estate-card',
+      'oneToOne',
+      'api::real-estate.real-estate'
+    >;
   };
 }
 
@@ -54,7 +78,9 @@ declare module '@strapi/types' {
     export interface Components {
       'other.contact': OtherContact;
       'other.header': OtherHeader;
+      'other.item-card': OtherItemCard;
       'other.job-card': OtherJobCard;
+      'other.real-estate-card': OtherRealEstateCard;
       'other.steps': OtherSteps;
     }
   }

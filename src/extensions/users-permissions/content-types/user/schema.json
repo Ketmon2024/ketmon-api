@@ -75,6 +75,12 @@
       "relation": "manyToMany",
       "target": "api::job.job",
       "mappedBy": "users"
+    },
+    "real_estates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::real-estate.real-estate",
+      "mappedBy": "users"
     }
   }
 }

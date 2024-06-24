@@ -36,12 +36,44 @@
       "max": 3
     },
     "jobSearchImage": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "itemsSearch": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "realEstateSearch": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "RecetRealEstates": {
+      "type": "component",
+      "repeatable": true,
+      "component": "other.real-estate-card",
+      "min": 4,
+      "max": 4,
       "required": true
+    },
+    "RecentItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "other.item-card",
+      "max": 4,
+      "required": true,
+      "min": 4
     }
   }
 }

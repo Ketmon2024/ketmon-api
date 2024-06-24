@@ -41,11 +41,55 @@
       "required": true
     },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "landlord": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::landlord.landlord",
+      "inversedBy": "real_estates"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "real_estates"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "real_estates"
+    },
+    "slug": {
+      "type": "customField",
+      "customField": "plugin::strapi-advanced-uuid.uuid"
+    },
+    "locationName": {
+      "type": "string",
+      "required": true
+    },
+    "locationCoordinates": {
+      "type": "customField",
+      "customField": "plugin::google-maps.location-picker",
+      "required": true
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "other.contact",
+      "max": 2,
+      "min": 1
+    },
+    "perMonth": {
+      "type": "integer",
+      "required": true,
+      "default": 1
     }
   }
 }
