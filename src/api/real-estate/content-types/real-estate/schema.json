@@ -62,7 +62,7 @@
     },
     "users": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "real_estates"
     },

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "landlord",
     "pluralName": "landlords",
-    "displayName": "Landlords"
+    "displayName": "Landlords",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -39,6 +40,24 @@
       "relation": "oneToMany",
       "target": "api::real-estate.real-estate",
       "mappedBy": "landlord"
+    },
+    "scammerReason": {
+      "type": "string"
+    },
+    "scammerDate": {
+      "type": "date"
+    },
+    "scammerProofs": {
+      "type": "string"
+    },
+    "scammerContacts": {
+      "type": "string"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "landlords"
     }
   }
 }

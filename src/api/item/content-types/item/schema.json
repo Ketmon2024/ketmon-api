@@ -40,6 +40,13 @@
       "relation": "manyToOne",
       "target": "api::city.city",
       "inversedBy": "items"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

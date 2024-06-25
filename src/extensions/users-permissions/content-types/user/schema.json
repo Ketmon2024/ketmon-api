@@ -78,7 +78,7 @@
     },
     "real_estates": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::real-estate.real-estate",
       "mappedBy": "users"
     }

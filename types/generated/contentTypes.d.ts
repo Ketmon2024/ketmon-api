@@ -738,7 +738,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     real_estates: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToMany',
+      'manyToMany',
       'api::real-estate.real-estate'
     >;
     createdAt: Attribute.DateTime;
@@ -926,11 +926,56 @@ export interface ApiCityCity extends Schema.CollectionType {
       'api::real-estate.real-estate'
     >;
     items: Attribute.Relation<'api::city.city', 'oneToMany', 'api::item.item'>;
+    landlords: Attribute.Relation<
+      'api::city.city',
+      'oneToMany',
+      'api::landlord.landlord'
+    >;
+    employers: Attribute.Relation<
+      'api::city.city',
+      'oneToMany',
+      'api::employer.employer'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::city.city', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::city.city', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactContact extends Schema.CollectionType {
+  collectionName: 'contacts';
+  info: {
+    singularName: 'contact';
+    pluralName: 'contacts';
+    displayName: 'Contacts';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    link: Attribute.String & Attribute.Required;
+    color: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'>;
+    background: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -967,6 +1012,15 @@ export interface ApiEmployerEmployer extends Schema.CollectionType {
       'api::employer.employer',
       'oneToMany',
       'api::job.job'
+    >;
+    scammerReason: Attribute.String;
+    scammerDate: Attribute.Date;
+    scammerProofs: Attribute.String;
+    scammerContacts: Attribute.String;
+    city: Attribute.Relation<
+      'api::employer.employer',
+      'manyToOne',
+      'api::city.city'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1115,6 +1169,7 @@ export interface ApiItemItem extends Schema.CollectionType {
         number
       >;
     city: Attribute.Relation<'api::item.item', 'manyToOne', 'api::city.city'>;
+    image: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1209,6 +1264,7 @@ export interface ApiLandlordLandlord extends Schema.CollectionType {
     singularName: 'landlord';
     pluralName: 'landlords';
     displayName: 'Landlords';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1234,6 +1290,15 @@ export interface ApiLandlordLandlord extends Schema.CollectionType {
       'api::landlord.landlord',
       'oneToMany',
       'api::real-estate.real-estate'
+    >;
+    scammerReason: Attribute.String;
+    scammerDate: Attribute.Date;
+    scammerProofs: Attribute.String;
+    scammerContacts: Attribute.String;
+    city: Attribute.Relation<
+      'api::landlord.landlord',
+      'manyToOne',
+      'api::city.city'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1311,7 +1376,7 @@ export interface ApiRealEstateRealEstate extends Schema.CollectionType {
     >;
     users: Attribute.Relation<
       'api::real-estate.real-estate',
-      'manyToOne',
+      'manyToMany',
       'plugin::users-permissions.user'
     >;
     slug: Attribute.UID &
@@ -1369,6 +1434,7 @@ declare module '@strapi/types' {
       'api::bank.bank': ApiBankBank;
       'api::category.category': ApiCategoryCategory;
       'api::city.city': ApiCityCity;
+      'api::contact.contact': ApiContactContact;
       'api::employer.employer': ApiEmployerEmployer;
       'api::faq.faq': ApiFaqFaq;
       'api::home-page.home-page': ApiHomePageHomePage;

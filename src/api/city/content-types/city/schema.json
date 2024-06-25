@@ -31,6 +31,18 @@
       "relation": "oneToMany",
       "target": "api::item.item",
       "mappedBy": "city"
+    },
+    "landlords": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::landlord.landlord",
+      "mappedBy": "city"
+    },
+    "employers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employer.employer",
+      "mappedBy": "city"
     }
   }
 }

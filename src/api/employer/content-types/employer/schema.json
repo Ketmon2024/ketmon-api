@@ -43,6 +43,24 @@
       "relation": "oneToMany",
       "target": "api::job.job",
       "mappedBy": "employer"
+    },
+    "scammerReason": {
+      "type": "string"
+    },
+    "scammerDate": {
+      "type": "date"
+    },
+    "scammerProofs": {
+      "type": "string"
+    },
+    "scammerContacts": {
+      "type": "string"
+    },
+    "city": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::city.city",
+      "inversedBy": "employers"
     }
   }
 }
