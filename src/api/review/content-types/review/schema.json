@@ -4,7 +4,8 @@
   "info": {
     "singularName": "review",
     "pluralName": "reviews",
-    "displayName": "Reviews"
+    "displayName": "Reviews",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,6 +32,12 @@
       "type": "integer",
       "max": 5,
       "min": 0
+    },
+    "landlord": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::landlord.landlord",
+      "inversedBy": "reviews"
     }
   }
 }

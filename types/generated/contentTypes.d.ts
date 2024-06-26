@@ -1310,6 +1310,11 @@ export interface ApiLandlordLandlord extends Schema.CollectionType {
       'manyToOne',
       'api::city.city'
     >;
+    reviews: Attribute.Relation<
+      'api::landlord.landlord',
+      'oneToMany',
+      'api::review.review'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1428,6 +1433,7 @@ export interface ApiReviewReview extends Schema.CollectionType {
     singularName: 'review';
     pluralName: 'reviews';
     displayName: 'Reviews';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1452,6 +1458,11 @@ export interface ApiReviewReview extends Schema.CollectionType {
         },
         number
       >;
+    landlord: Attribute.Relation<
+      'api::review.review',
+      'manyToOne',
+      'api::landlord.landlord'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
