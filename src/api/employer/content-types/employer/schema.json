@@ -61,6 +61,12 @@
       "relation": "manyToOne",
       "target": "api::city.city",
       "inversedBy": "employers"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review",
+      "mappedBy": "employer"
     }
   }
 }

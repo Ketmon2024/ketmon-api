@@ -741,6 +741,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'api::real-estate.real-estate'
     >;
+    reviews: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::review.review'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1021,6 +1026,11 @@ export interface ApiEmployerEmployer extends Schema.CollectionType {
       'api::employer.employer',
       'manyToOne',
       'api::city.city'
+    >;
+    reviews: Attribute.Relation<
+      'api::employer.employer',
+      'oneToMany',
+      'api::review.review'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1412,6 +1422,54 @@ export interface ApiRealEstateRealEstate extends Schema.CollectionType {
   };
 }
 
+export interface ApiReviewReview extends Schema.CollectionType {
+  collectionName: 'reviews';
+  info: {
+    singularName: 'review';
+    pluralName: 'reviews';
+    displayName: 'Reviews';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_user: Attribute.Relation<
+      'api::review.review',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    employer: Attribute.Relation<
+      'api::review.review',
+      'manyToOne',
+      'api::employer.employer'
+    >;
+    text: Attribute.String & Attribute.Required;
+    rating: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 5;
+        },
+        number
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::review.review',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::review.review',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1442,6 +1500,7 @@ declare module '@strapi/types' {
       'api::job.job': ApiJobJob;
       'api::landlord.landlord': ApiLandlordLandlord;
       'api::real-estate.real-estate': ApiRealEstateRealEstate;
+      'api::review.review': ApiReviewReview;
     }
   }
 }
