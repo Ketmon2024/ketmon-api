@@ -1190,6 +1190,7 @@ export interface ApiItemItem extends Schema.CollectionType {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
+    price: Attribute.Integer & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

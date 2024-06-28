@@ -56,7 +56,8 @@
       "mappedBy": "items"
     },
     "price": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     }
   }
 }
