@@ -87,6 +87,12 @@
       "relation": "oneToMany",
       "target": "api::review.review",
       "mappedBy": "users_permissions_user"
+    },
+    "items": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::item.item",
+      "inversedBy": "users"
     }
   }
 }

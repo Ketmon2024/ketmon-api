@@ -746,6 +746,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::review.review'
     >;
+    items: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::item.item'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1180,6 +1185,11 @@ export interface ApiItemItem extends Schema.CollectionType {
       >;
     city: Attribute.Relation<'api::item.item', 'manyToOne', 'api::city.city'>;
     image: Attribute.Media<'images'>;
+    users: Attribute.Relation<
+      'api::item.item',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
