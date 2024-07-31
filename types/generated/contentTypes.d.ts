@@ -1067,6 +1067,7 @@ export interface ApiFaqFaq extends Schema.CollectionType {
   };
   attributes: {
     question: Attribute.String & Attribute.Required;
+    content: Attribute.Blocks & Attribute.Required;
     answer: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

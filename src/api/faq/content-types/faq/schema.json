@@ -15,6 +15,10 @@
       "type": "string",
       "required": true
     },
+    "content": {
+      "type": "blocks",
+      "required": true
+    },
     "answer": {
       "type": "text"
     }
