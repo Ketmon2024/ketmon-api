@@ -16,8 +16,8 @@
       "type": "component",
       "repeatable": true,
       "component": "other.job-card",
-      "max": 4,
-      "min": 4
+      "max": 5,
+      "min": 5
     },
     "Header": {
       "type": "component",
@@ -63,17 +63,9 @@
       "type": "component",
       "repeatable": true,
       "component": "other.real-estate-card",
-      "min": 4,
-      "max": 4,
+      "min": 5,
+      "max": 5,
       "required": true
-    },
-    "RecentItems": {
-      "type": "component",
-      "repeatable": true,
-      "component": "other.item-card",
-      "max": 4,
-      "required": true,
-      "min": 4
     }
   }
 }
