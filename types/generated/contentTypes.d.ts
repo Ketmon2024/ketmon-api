@@ -1094,8 +1094,8 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
     RecentJobs: Attribute.Component<'other.job-card', true> &
       Attribute.SetMinMax<
         {
-          min: 4;
-          max: 4;
+          min: 5;
+          max: 5;
         },
         number
       >;
@@ -1123,17 +1123,8 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
       Attribute.Required &
       Attribute.SetMinMax<
         {
-          min: 4;
-          max: 4;
-        },
-        number
-      >;
-    RecentItems: Attribute.Component<'other.item-card', true> &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 4;
-          max: 4;
+          min: 5;
+          max: 5;
         },
         number
       >;
